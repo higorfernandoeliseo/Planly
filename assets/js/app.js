@@ -819,7 +819,7 @@ formList.onsubmit = async (evt) => {
     const formData = new FormData(formList);
 	const formObject = Object.fromEntries(formData.entries());
 
-	if (formObject.name_list_edit.length === 0) {
+	if (formObject.name_list.length === 0) {
 		alert("campo Nome da lista vazio!");
 	}
 
@@ -864,4 +864,5 @@ botoesEventos();
 printMessageDayNight();
 
 checkRecurrences();
+
 
