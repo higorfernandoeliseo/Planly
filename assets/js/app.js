@@ -815,22 +815,27 @@ formTask.onsubmit = async (evt) => {
 formList.onsubmit = async (evt) => {
     
     evt.preventDefault();
-
+	
     const formData = new FormData(formList);
-    const formObject = Object.fromEntries(formData.entries());
 
-    const dataObj = new Date();
+	if(formData) {
+	
+	    const formObject = Object.fromEntries(formData.entries());
+	
+	    const dataObj = new Date();
+	
+	    let dataList = {
+	        title_list: formObject.name_list,
+	        createdAt_list: dataObj.toISOString()
+	    }
+	
+	    await addList(dataList);
+	
+	    formList.reset();
+	
+	    closeModal(modalNewList);
 
-    let dataList = {
-        title_list: formObject.name_list,
-        createdAt_list: dataObj.toISOString()
-    }
-
-    await addList(dataList);
-
-    formList.reset();
-
-    closeModal(modalNewList);
+	}
 
 }
 
@@ -858,4 +863,5 @@ ViewLists();
 
 botoesEventos();
 printMessageDayNight();
+
 checkRecurrences();
