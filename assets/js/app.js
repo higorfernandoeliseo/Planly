@@ -817,25 +817,24 @@ formList.onsubmit = async (evt) => {
     evt.preventDefault();
 	
     const formData = new FormData(formList);
+	const formObject = Object.fromEntries(formData.entries());
 
-	if(formData) {
-	
-	    const formObject = Object.fromEntries(formData.entries());
-	
-	    const dataObj = new Date();
-	
-	    let dataList = {
-	        title_list: formObject.name_list,
-	        createdAt_list: dataObj.toISOString()
-	    }
-	
-	    await addList(dataList);
-	
-	    formList.reset();
-	
-	    closeModal(modalNewList);
-
+	if (formObject.name_list_edit.length === 0) {
+		alert("campo Nome da lista vazio!");
 	}
+
+	const dataObj = new Date();
+
+	let dataList = {
+		title_list: formObject.name_list,
+		createdAt_list: dataObj.toISOString()
+	}
+
+	await addList(dataList);
+
+	formList.reset();
+
+	closeModal(modalNewList);
 
 }
 
@@ -865,3 +864,4 @@ botoesEventos();
 printMessageDayNight();
 
 checkRecurrences();
+
